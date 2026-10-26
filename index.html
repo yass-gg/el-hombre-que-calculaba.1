@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El hombre que calculaba - Ejercicios</title>
+  <link rel="stylesheet" href="css\styless.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <h1>El hombre que calculaba</h1>
+    <p>Problemas de Malba Tahan resueltos con JavaScript</p>
+  </header>
+
+  <nav class="menu">
+    <button class="enlace activo" data-target="camellos">🐪 Camellos</button>
+    <button class="enlace" data-target="panes">🍞 Los 8 panes</button>
+    <button class="enlace" data-target="cuadratica">📐 Ejercicio 12</button>
+    <button class="enlace" data-target="pi">π Ejercicio 13</button>
+  </nav>
+
+  <main class="contenedor">
+
+    <!-- ========== 1. CAMELLOS ========== -->
+    <section id="camellos" class="seccion visible">
+      <h2>Capítulo III: los 35 camellos</h2>
+
+      <div class="tarjeta">
+        <h3>Descripción del capítulo</h3>
+        <p>Cerca de un albergue de caravanas, Beremiz y su compañero encuentran a tres hermanos
+        discutiendo por la herencia de su padre: 35 camellos que deben repartirse así: la mitad
+        para el mayor, un tercio para Hamed y un noveno para Harim, el menor. Como 35 no se divide
+        exactamente entre 2, 3 y 9, ningún reparto los satisfacía. Beremiz suma el camello de su
+        amigo a la herencia (36), entrega 18, 12 y 4 (34 en total) y quedan 2 camellos: uno se
+        devuelve a su dueño y el otro es la recompensa de Beremiz.
+        <br><b>En esta versión el problema es general:</b> puedes usar cualquier cantidad de camellos
+        y de herederos, y siempre se reparten camellos enteros.</p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Algoritmo</h3>
+        <ol>
+          <li>Leer el número de camellos <b>n</b> y el denominador <b>d</b> de cada heredero (recibe 1/d).</li>
+          <li>Calcular el mínimo común múltiplo <b>L</b> de todos los denominadores.</li>
+          <li>Hallar el menor total <b>T</b>, múltiplo de L, tal que T ≥ n. Se prestan <b>k = T − n</b> camellos.</li>
+          <li>Cada heredero recibe <b>T / d</b>, que siempre es un entero.</li>
+          <li>Sobrantes = T − (suma de partes). Se devuelven los k prestados y lo que queda es la ganancia.</li>
+          <li>Si los sobrantes no alcanzan para devolver los k prestados, ese reparto no es posible.</li>
+        </ol>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Entrada de datos</h3>
+        <form id="form-camellos">
+          <div class="fila">
+            <label>Camellos (n)
+              <input type="number" id="c-n" min="1" max="1000000000" step="1" value="35" required>
+            </label>
+          </div>
+          <p><b>Herederos</b> (cada uno recibe 1/d de la herencia):</p>
+          <div class="fila" id="c-herederos"></div>
+          <button type="button" class="boton secundario" id="c-agregar">+ Agregar heredero</button>
+          <button type="button" class="boton secundario" id="c-quitar">− Quitar heredero</button>
+          <br><br>
+          <button type="submit" class="boton">Repartir</button>
+        </form>
+      </div>
+
+      <div class="tarjeta salida">
+        <h3>Salida</h3>
+        <div id="salida-camellos" class="resultado">Presiona "Repartir" para ver el resultado.</div>
+      </div>
+    </section>
+
+    <!-- ========== 2. PANES ========== -->
+    <section id="panes" class="seccion">
+      <h2>Capítulo IV: los ocho panes</h2>
+
+      <div class="tarjeta">
+        <h3>Descripción del capítulo</h3>
+        <p>Camino a Bagdad encuentran al jeque Salem Nassair, malherido y hambriento. El bagdalí
+        lleva 3 panes y Beremiz lleva 5. Juntan los 8 panes y los comen entre los tres. Al llegar,
+        el jeque paga 8 monedas de oro. La división <b>simple</b> sería 5 monedas y 3 monedas, pero
+        Beremiz demuestra que la división <b>cierta</b> es 7 y 1: cortando cada pan en 3 pedazos
+        hubo 24 pedazos, cada uno comió 8, así que Beremiz dio 7 y su compañero dio 1. Después
+        propone la división <b>perfecta</b>: 4 monedas para cada uno.</p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Algoritmo</h3>
+        <ol>
+          <li>Leer los panes del primero (a), los del segundo (b) y las monedas pagadas (M).</li>
+          <li>Cortar cada pan en 3 pedazos. Total de pedazos = 3(a + b). Como comen 3 personas, cada una come T = a + b pedazos.</li>
+          <li>Pedazos que dio cada uno al jeque: 3a − T y 3b − T (nunca negativos).</li>
+          <li>División simple: proporcional a los panes. División cierta: M · (pedazos dados) / T. División perfecta: M / 2 para cada uno.</li>
+        </ol>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Entrada de datos</h3>
+        <form id="form-panes">
+          <div class="fila">
+            <label>Panes de Beremiz
+              <input type="number" id="p-a" min="1" step="1" value="5" required>
+            </label>
+            <label>Panes del bagdalí
+              <input type="number" id="p-b" min="1" step="1" value="3" required>
+            </label>
+            <label>Monedas pagadas
+              <input type="number" id="p-m" min="1" step="1" value="8" required>
+            </label>
+          </div>
+          <button type="submit" class="boton">Calcular reparto</button>
+        </form>
+      </div>
+
+      <div class="tarjeta salida">
+        <h3>Salida</h3>
+        <div id="salida-panes" class="resultado">Presiona "Calcular reparto" para ver el resultado.</div>
+      </div>
+    </section>
+
+    <!-- ========== 3. CUADRATICA (12) ========== -->
+    <section id="cuadratica" class="seccion">
+      <h2>Ejercicio 12: raíces de una ecuación cuadrática</h2>
+
+      <div class="tarjeta">
+        <h3>Descripción del ejercicio</h3>
+        <p>Programa que determina las raíces reales de <b>ax² + bx + c = 0</b>. El usuario ingresa
+        las constantes a, b y c, y el programa calcula el discriminante <b>D = b² − 4ac</b>.
+        Si D &gt; 0 muestra "The equation has two roots" y las dos raíces; si D = 0 muestra
+        "The equation has one root" y la raíz; si D &lt; 0 muestra "The equation has no real roots".
+        Se prueba con (a) 3x² + 6x + 3 = 0, (b) −3x² + 4x − 6 = 0 y (c) −3x² + 7x + 5 = 0.</p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Algoritmo</h3>
+        <ol>
+          <li>Leer a, b, c (a debe ser distinto de 0).</li>
+          <li>Calcular D = b² − 4ac.</li>
+          <li>Si D &gt; 0: dos raíces, x = (−b ± √D) / 2a.</li>
+          <li>Si D = 0: una raíz, x = −b / 2a.</li>
+          <li>Si D &lt; 0: no hay raíces reales.</li>
+        </ol>
+      </div>
+
+      <div class="tarjeta">
+        <h3>Entrada de datos</h3>
+        <form id="form-cuad">
+          <div class="fila">
+            <label>a <input type="number" id="q-a" step="any" value="3" required></label>
+            <label>b <input type="number" id="q-b" step="any" value="6" required></label>
+            <label>c <input type="number" id="q-c" step="any" value="3" required></label>
+          </div>
+          <button type="submit" class="boton">Resolver</button>
+          <span class="ejemplos">Cargar ecuación:
+            <button type="button" class="mini" data-abc="3,6,3">(a)</button>
+            <button type="button" class="mini" data-abc="-3,4,-6">(b)</button>
+            <button type="button" class="mini" data-abc="-3,7,5">(c)</button>
+          </span>
+        </form>
+      </div>
+
+      <div class="tarjeta salida">
+        <h3>Salida</h3>
+        <div id="salida-cuad" class="resultado">Presiona "Resolver" para ver el resultado.</div>
+      </div>
+    </section>
+
+    <!-- ========== 4. PI (13) ========== -->
+    <section id="pi" class="seccion">
+      <h2>Ejercicio 13: estimación de π</h2>
+
+      <div class="tarjeta">
+  <h3>Descripción del ejercicio</h3>
+  <p>El valor de π se puede estimar con la expresión <b>√(6 · Σ 1/n²)</b>, sumando desde
+  n = 1 hasta un valor N. Se calcula con un ciclo y se compara con el valor real de π
+  (equivalente a <code>format long</code> en MATLAB, es decir, 15 decimales). El ejercicio
+  pide probar con N = 100, N = 10000 y N = 1000000. En esta versión N llega hasta
+  <b>1.000.000</b>.</p>
+</div>
+
+<div class="tarjeta">
+  <h3>Algoritmo</h3>
+  <ol>
+    <li>Leer N (entero entre 1 y 1.000.000).</li>
+    <li>suma = 0. Para n desde 1 hasta N: suma = suma + 1/n².</li>
+    <li>estimación = √(6 · suma).</li>
+    <li>Comparar con Math.PI y calcular el error absoluto.</li>
+  </ol>
+</div>
+
+      <div class="tarjeta">
+        <h3>Entrada de datos</h3>
+        <form id="form-pi">
+  <div class="fila">
+    <label>Valor de N (1 a 1.000.000)
+      <input type="number" id="pi-n" min="1" max="1000000" step="1" value="100" required>
+    </label>
+  </div>
+  <button type="submit" class="boton">Estimar π</button>
+  <button type="button" class="boton secundario" id="pi-100">N = 100</button>
+  <button type="button" class="boton secundario" id="pi-10000">N = 10000</button>
+  <button type="button" class="boton secundario" id="pi-millon">N = 1000000</button>
+  <button type="button" class="boton secundario" id="pi-todos">Comparar los tres</button>
+</form>
+      </div>
+
+      <div class="tarjeta salida">
+        <h3>Salida</h3>
+        <div id="salida-pi" class="resultado">Presiona "Estimar π" para ver el resultado.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">Proyecto con HTML, CSS y JavaScript</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
